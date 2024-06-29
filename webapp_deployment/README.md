@@ -1,11 +1,11 @@
 # CD12352 - Infrastructure as Code Project Solution
-# [YOUR NAME HERE]
+# Rahul Manchanda
 
 ## Spin up instructions
-TODO
+./deploy.sh deploy rahul-dev-stack network.yml network-parameters.json us-east-1
 
 ## Tear down instructions
-TODO
+./deploy.sh delete rahul-dev-stack us-east-1 
 
 ## Other considerations
 TODO (optional)
