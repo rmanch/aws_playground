@@ -1,17 +1,17 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: <NAME OF THE ConfigMap>
+  name: demo-config
 data:
-  DB_NAME: first-db
-  DB_USER: root
-  DB_HOST: <ENTER YOUR DB HOST HERE>
-  DB_PORT: 5432
+  DB_NAME: 'first-db'
+  DB_USER: 'root'
+  DB_HOST: '172.31.43.185'
+  DB_PORT: '5432'
 ---
 apiVersion: v1
 kind: Secret
 metadata:
-  name: DB_PASSWORD
+  name: db-password
 type: Opaque
 data:
-  DB_PASSWORD: cm9vdA==
+  db-password: cm9vdA==

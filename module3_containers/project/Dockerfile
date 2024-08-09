@@ -14,10 +14,10 @@ RUN pip install -r requirements.txt
 
 COPY . .
 
-ARG DB_USERNAME=root
-ARG DB_PASSWORD=root
-ARG DB_HOST=127.0.0.1
-ARG DB_PORT=5433
-ARG DB_NAME=first-db
+# ARG DB_USERNAME=root
+# ARG DB_PASSWORD=root
+# ARG DB_HOST=127.0.0.1
+# ARG DB_PORT=5433
+# ARG DB_NAME=first-db
 
 CMD python analytics/app.py
