@@ -20,4 +20,4 @@ COPY . .
 # ARG DB_PORT=5433
 # ARG DB_NAME=first-db
 
-CMD python analytics/app.py
+CMD python ./analytics/app.py
