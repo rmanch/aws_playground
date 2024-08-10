@@ -28,8 +28,6 @@ def readiness_check():
     else:
         return "ok"
 
-def get_test_method():
-    return "working fine"
 
 def get_daily_visits():
     with app.app_context():
@@ -80,7 +78,7 @@ def all_user_visits():
 
 
 scheduler = BackgroundScheduler()
-job = scheduler.add_job(get_test_method, 'interval', seconds=30)
+job = scheduler.add_job(get_daily_visits, 'interval', seconds=30)
 scheduler.start()
 
 if __name__ == "__main__":
