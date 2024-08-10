@@ -5,7 +5,7 @@ metadata:
 data:
   DB_NAME: 'first-db'
   DB_USERNAME: 'root'
-  DB_HOST: 'postgresql-service'
+  DB_HOST: '10.100.94.115'
   DB_PORT: '5432'
 ---
 apiVersion: v1
