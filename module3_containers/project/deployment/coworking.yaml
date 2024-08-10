@@ -7,10 +7,10 @@ spec:
   selector:
     service: coworking
   ports:
-  - name: "5253"
+  - name: "5153"
     protocol: TCP
-    port: 5253
-    targetPort: 5253
+    port: 5153
+    targetPort: 5153
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -30,19 +30,19 @@ spec:
     spec:
       containers:
       - name: coworking
-        image: 803063329130.dkr.ecr.us-east-1.amazonaws.com/my-first-repo:46
+        image: 803063329130.dkr.ecr.us-east-1.amazonaws.com/my-first-repo:47
        # command: ["python", "app.py"]
         imagePullPolicy: IfNotPresent
-        livenessProbe:cl
+        livenessProbe:
           httpGet:
             path: /health_check
-            port: 5253
+            port: 5153
           initialDelaySeconds: 5
           timeoutSeconds: 60
         readinessProbe:
           httpGet:
             path: "/readiness_check"
-            port: 5253
+            port: 5153
           initialDelaySeconds: 5
           timeoutSeconds: 60
         envFrom:

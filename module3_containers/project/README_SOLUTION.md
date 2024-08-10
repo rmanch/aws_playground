@@ -1,6 +1,14 @@
+# Releasing the New Builds
 
-
-
+ 1. Any changes to code should be merged in Github.
+ 2. The codebuild automatically triggers the CI/CD pipeline and creates an image.
+ 3. The image is stored in Elastic Container Registry. 
+ 4. Postgres database is setup through kubectl. It runs on one of the node behind a postgres service. 
+ 5. Few tables and seed data is inserted in the Postgres database. 
+ 6. The coworking yaml file is then applied using kubectl.
+ 7. The logs and description commands are used to check all pods are running state.
+ 8. Use the troubleshooting steps below if you are stuck.
+ 9. Access the site to check the data is returned.
 
 
 # Troublehsooting
@@ -18,7 +26,7 @@
 	  * kubectl describe pod <POD_NAME>
 	  * kubectl exec -it <POD_NAME> bash
 	  * kubectl get services
-	  * kubectl exec -it <pod name> bash
+	  * kubectl exec -it postgresql-7c6f685595-mmts9 bash
 	  *	kubectl config current-context
 	  * kubectl config view
       * kubectl delete pod <pod name>
@@ -61,7 +69,15 @@
      kubectl get secret db-password-secret -o jsonpath="{.data.db-password}" | base64 -d
 	 kubectl apply -f configmap.yaml
 	 kubectl apply -f coworking.yaml
+	 kubectl delete -f coworking.yaml
 
 	 curl a47ccd13d14c941809b6cc0199426242-628259610.us-east-1.elb.amazonaws.com:5153/api/reports/daily_usage
+
+
+aws iam attach-role-policy \
+--role-name EMR_EC2_DefaultRole \
+--policy-arn arn:aws:iam::aws:policy/CloudWatchAgentServerPolicy 
+
+
 
 
