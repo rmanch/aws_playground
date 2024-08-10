@@ -8,7 +8,7 @@ phases:
   build:
     commands:
       - echo Starting build at `date` 
-      - echo Building the Docker image test....  
+      - echo Building the Docker image test.....  
       - cd module3_containers/project/analytics
       - echo Directory changed to analytics..
       - docker build -t $IMAGE_REPO_NAME:$CODEBUILD_BUILD_NUMBER .
