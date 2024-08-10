@@ -14,4 +14,4 @@ WORKDIR /src
 COPY ./test/requirements.txt requirements.txt
 RUN pip install -r requirements.txt
 COPY ./test .
-CMD python app.py
+CMD python3 app.py
