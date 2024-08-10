@@ -23,9 +23,36 @@
 	  * kubectl config view
       * kubectl delete pod <pod name>
 
+* Build and run Manually:
+   	export POSTGRES_PASSWORD=$(kubectl get secret --namespace default db-password-secret -o jsonpath="{.data.db-password}" | base64 -d)
+	kubectl port-forward svc/postgresql-service 5433:5432 & 
+	export DB_USERNAME=root
+	export DB_PASSWORD=${POSTGRES_PASSWORD}
+	export DB_HOST=127.0.0.1
+	export DB_PORT=5433
+	export DB_NAME=first-db
+	PGPASSWORD="$DB_PASSWORD" psql --host 127.0.0.1 -U root -d first-db -p 5433 < 1_create_tables.sql
+	PGPASSWORD="$DB_PASSWORD" psql --host 127.0.0.1 -U root -d first-db -p 5433 < 2_seed_users.sql
+	PGPASSWORD="$DB_PASSWORD" psql --host 127.0.0.1 -U root -d first-db -p 5433 < 3_seed_tokens.sql
+	kubectl get pods
+	kubectl exec -it postgresql-7c6f685595-j4ht5 -- bash
+	psql -U root -d first-db
+
+
 
 * Build and Run individual Docker Images
-	* docker build -t coworking-analytics -f Dockerfile .
-	* docker run --network="host" -e DB_USERNAME='root' -e DB_PASSWORD='root' -e DB_HOST='172.31.34.46' -e DB_PORT='5433' -e DB_NAME='first-db' coworking-analytics      	
+	* docker build -t test-coworking-analytics-1 .
+	* docker run --network="host" -e DB_USERNAME='root' -e DB_PASSWORD='root' -e DB_HOST='postgresql-service' -e DB_PORT='5432' -e DB_NAME='first-db' test-coworking-analytics-1     	
+    * docker run -e DB_USERNAME='root' -e DB_PASSWORD='root' -e DB_HOST='10.100.94.115' -e DB_PORT='5432' -e DB_NAME='first-db' test-coworking-analytics-1  
+    * docker run --network="host" test-coworking-analytics-1  
 
-	
+
+* Port Forward Command:
+    * kubectl port-forward --namespace default svc/postgresql-service 5433:5432 &
+
+
+* Setting up Encrypted Passwords and Config variables:
+     kubectl get secret <NAME OF THE Secret> -o jsonpath="{.data.<THE KEY FROM Secret WHICH has THE ENCODED PASSWORD>}" | base64 -d
+     kubectl get secret db-password-secret -o jsonpath="{.data.db-password}" | base64 -d
+	 kubectl apply -f configmap.yaml
+	 kubectl apply -f coworking.yaml
