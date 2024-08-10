@@ -7,6 +7,9 @@ app = Flask(__name__)
 def health_check():
     return "ok"
 
-
+@app.route("/readiness_check")
+def readiness_check():
+        return "ok"
+    
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5151)
+    app.run(host="0.0.0.0", port=5253)
