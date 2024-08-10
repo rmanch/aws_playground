@@ -30,20 +30,21 @@ spec:
     spec:
       containers:
       - name: coworking
-        image: 803063329130.dkr.ecr.us-east-1.amazonaws.com/my-first-repo:40
+        image: 803063329130.dkr.ecr.us-east-1.amazonaws.com/my-first-repo:42
+        command: ["python", "app.py"]
         imagePullPolicy: IfNotPresent
         livenessProbe:
           httpGet:
             path: /health_check
             port: 5253
           initialDelaySeconds: 5
-          timeoutSeconds: 120
+          timeoutSeconds: 60
         readinessProbe:
           httpGet:
             path: "/readiness_check"
             port: 5253
           initialDelaySeconds: 5
-          timeoutSeconds: 120
+          timeoutSeconds: 60
         envFrom:
         - configMapRef:
             name: demo-config
