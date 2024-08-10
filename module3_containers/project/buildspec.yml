@@ -9,6 +9,8 @@ phases:
     commands:
       - echo Starting build at `date` 
       - echo Building the Docker image test....  
+      - cd module3_containers/project/analytics
+      - echo Directory changed to analytics..
       - docker build -t $IMAGE_REPO_NAME:$CODEBUILD_BUILD_NUMBER .
       - docker tag $IMAGE_REPO_NAME:$CODEBUILD_BUILD_NUMBER $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$CODEBUILD_BUILD_NUMBER      
   post_build:

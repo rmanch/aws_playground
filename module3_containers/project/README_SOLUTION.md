@@ -41,9 +41,14 @@
 
 
 * Build and Run individual Docker Images
-	* docker build -t test-coworking-analytics-1 .
-	* docker run --network="host" -e DB_USERNAME='root' -e DB_PASSWORD='root' -e DB_HOST='postgresql-service' -e DB_PORT='5432' -e DB_NAME='first-db' test-coworking-analytics-1     	
-    * docker run -e DB_USERNAME='root' -e DB_PASSWORD='root' -e DB_HOST='10.100.94.115' -e DB_PORT='5432' -e DB_NAME='first-db' test-coworking-analytics-1  
+	* docker build -t test-coworking-analytics-6 .
+
+
+	* docker run --network="host" -e DB_USERNAME='root' -e DB_PASSWORD='root' -e DB_HOST='172.31.95.250' -e DB_PORT='5432' -e DB_NAME='first-db' test-coworking-analytics-6  	
+
+	 docker run -e DB_USERNAME='root' -e DB_PASSWORD='root' -e DB_HOST='127.0.0.1' -e DB_PORT='5433' -e DB_NAME='first-db' test-coworking-analytics-6  
+
+    
     * docker run --network="host" test-coworking-analytics-1  
 
 
@@ -56,3 +61,7 @@
      kubectl get secret db-password-secret -o jsonpath="{.data.db-password}" | base64 -d
 	 kubectl apply -f configmap.yaml
 	 kubectl apply -f coworking.yaml
+
+	 curl a47ccd13d14c941809b6cc0199426242-628259610.us-east-1.elb.amazonaws.com:5153/api/reports/daily_usage
+
+
