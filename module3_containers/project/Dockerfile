@@ -9,7 +9,7 @@
 # COPY . .
 # CMD python app.py
 
-FROM python:3.10-slim-buster
+FROM --platform=arm64 python:3.10-slim-buster
 WORKDIR /src
 COPY ./test/requirements.txt requirements.txt
 RUN pip install -r requirements.txt
