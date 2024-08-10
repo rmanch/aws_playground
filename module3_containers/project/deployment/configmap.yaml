@@ -4,7 +4,7 @@ metadata:
   name: demo-config
 data:
   DB_NAME: 'first-db'
-  DB_USER: 'root'
+  DB_USERNAME: 'root'
   DB_HOST: 'postgresql-service'
   DB_PORT: '5432'
 ---

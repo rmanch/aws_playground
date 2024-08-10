@@ -30,7 +30,7 @@ spec:
     spec:
       containers:
       - name: coworking
-        image: 803063329130.dkr.ecr.us-east-1.amazonaws.com/my-first-repo:28
+        image: 803063329130.dkr.ecr.us-east-1.amazonaws.com/my-first-repo:36
         imagePullPolicy: IfNotPresent
         livenessProbe:
           httpGet:
@@ -48,9 +48,29 @@ spec:
         - configMapRef:
             name: demo-config
         env:
+        - name: DB_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: demo-config
+              key: DB_HOST
+        - name: DB_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: demo-config
+              key: DB_PORT
+        - name: DB_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: demo-config
+              key: DB_NAME
+        - name: DB_USERNAME
+          valueFrom:
+            configMapKeyRef:
+              name: demo-config
+              key: DB_USERNAME
         - name: DB_PASSWORD
           valueFrom:
             secretKeyRef:
               name: db-password-secret
-              key: db-password
-      restartPolicy: Always
+              key: db-password      
+      restartPolicy: 
