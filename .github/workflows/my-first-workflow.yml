@@ -44,6 +44,9 @@ jobs:
         run: echo "Hello, world!"
         continue-on-error: true # ensures that the workflow continues to the next step even if this step fails.
 
+      - name: My Custom Action
+        uses: rmanch/aws_playground@main
+ 
   test:
     needs: [build]
     runs-on: ubuntu-latest
