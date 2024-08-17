@@ -41,15 +41,15 @@ jobs:
 
       # Install the dependencies.
       - run: |
-            npm install
+            cd backend && npm ci
 
       # Run the tests.
       - run: |
-            echo 'Run The Tests...'
+            cd backend && npm test
 
       # Run the linter.
       - run: |
-            echo 'Run the Linter...'
+            cd backend && npm run lint
 
       # Send a console message at completion.
       - run: |
