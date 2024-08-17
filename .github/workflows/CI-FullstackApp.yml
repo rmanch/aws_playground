@@ -26,7 +26,7 @@ jobs:
 
     strategy: 
         matrix:
-          node-version: [16, 18]
+          node-version: [16.x, 18.x]
           #platform: [ubuntu-latest, macos-latest, windows-latest]
 
     steps:
@@ -41,11 +41,11 @@ jobs:
 
       # Install the dependencies.
       - run: |
-            cd backend && npm ci
+            cd ../module4_cicd/CI-FullstackApp/backend && npm ci
 
       # Run the tests.
       - run: |
-            cd backend && npm test
+            cd ../module4_cicd/CI-FullstackApp/backend && npm test
 
       # Run the linter.
       - run: |
