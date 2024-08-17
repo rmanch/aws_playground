@@ -27,10 +27,7 @@ jobs:
     strategy: 
         matrix:
           node-version: [16, 18]
-          platform: [ubuntu-latest, macos-latest, windows-latest]
-          exclude:
-            - platform: macos-latest
-              node-version: 14
+          #platform: [ubuntu-latest, macos-latest, windows-latest]
 
     steps:
       # Check out the code from the repository.
@@ -40,7 +37,7 @@ jobs:
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
-          node-version: ${{ env.NODE_VERSION }}
+          node-version: ${{ matrix.node-version }}
 
       # Install the dependencies.
       - run: |
@@ -57,4 +54,3 @@ jobs:
       # Send a console message at completion.
       - run: |
           "Hello [username of the user who initiated the run]. You pushed to [repository_name] at $(date)."."
-          
