@@ -7,7 +7,7 @@ phases:
       - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
   build:
     commands:
-      - echo Starting build at `date` 
+      - echo Starting build at `date`
       - echo Building the Docker image test..... 
       - cd module3_containers/project       
       - docker build -t $IMAGE_REPO_NAME:$CODEBUILD_BUILD_NUMBER .

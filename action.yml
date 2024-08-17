@@ -1,0 +1,13 @@
+name: 'Business Greetings'
+description: 'Sample AWS Playgroup'
+inputs:
+  name:
+    description: 'Name of the person or team to greet'
+    required: true
+    default: 'Sample Program'
+outputs:
+  timestamp:
+    description: 'Time of the greeting!'
+runs:
+  using: 'node18'
+  main: 'index.js'

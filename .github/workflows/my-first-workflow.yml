@@ -18,24 +18,38 @@ on:
 
 env: 
   NODE_VERSION: '18'
+  CURRENT_YEAR: '2024'
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    strategy: 
+      matrix:
+        node-version: [14, 16, 18]
+        platform: [ubuntu-latest, macos-latest, windows-latest]
+        exclude:
+          - platform: macos-latest
+            node-version: 14
+      fail-fast: false ## all jobs will run to completion, even if one fails.
     steps:
       - name: Check out repository
         uses: actions/checkout@v3
 
-      - name: Use Node.js 18
+      - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
           node-version: ${{ env.NODE_VERSION }}
 
-      - name: Print a message
+      - name: Print Hello World
         run: echo "Hello, world!"
+        continue-on-error: true # ensures that the workflow continues to the next step even if this step fails.
 
   test:
+    needs: [build]
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Testing all the things..."
+      - name: Hello
+        if: always() and ${{ env.CURRENT_YEAR == '2024' }} # Always run irrespetive of failure of prev job
+        run: |
+          echo "Testing all the things..."
+          echo "$Greeting $Full_Name. As of $MONTH_OF_YEAR $CURRENT_YEAR you will have $Vacation_Days vacation days!"
