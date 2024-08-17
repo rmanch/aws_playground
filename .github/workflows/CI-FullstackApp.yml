@@ -54,4 +54,4 @@ jobs:
 
       # Send a console message at completion.
       - run: |
-          echo "Hello [username of the user who initiated the run]. You pushed to [repository_name] at $(date)."."
+          echo "Hello ${{github.actor}}. You pushed to ${{github.repository}} at $(date)."
