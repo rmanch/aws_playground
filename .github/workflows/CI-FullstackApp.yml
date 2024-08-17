@@ -1,0 +1,60 @@
+name: Github Action Workflow Exercise
+
+# Ensure the workflow runs on schedule (Sunday at 0:00) and on push to the main branch
+on:
+    # Manual trigger using the workflow_dispatch event
+    workflow_dispatch:
+    
+    pull_request:
+      branches:
+        - main
+  
+    push:
+      branches:
+        - main
+  
+    schedule:
+       # * is a special character in YAML so you have to quote this string
+      - cron: '0 0 * * 0' 
+
+
+# Use a matrix strategy to use Node.js versions 16.x and 18.x
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy: 
+        matrix:
+          node-version: [16, 18]
+          platform: [ubuntu-latest, macos-latest, windows-latest]
+          exclude:
+            - platform: macos-latest
+              node-version: 14
+
+    steps:
+      # Check out the code from the repository.
+      - uses: actions/checkout@v3
+
+      # Set up a Node.js environment using the specified node version.
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      # Install the dependencies.
+      - run: |
+            npm install
+
+      # Run the tests.
+      - run: |
+            echo 'Run The Tests...'
+
+      # Run the linter.
+      - run: |
+            echo 'Run the Linter...'
+
+      # Send a console message at completion.
+      - run: |
+          "Hello [username of the user who initiated the run]. You pushed to [repository_name] at $(date)."."
+          
