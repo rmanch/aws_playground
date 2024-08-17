@@ -41,11 +41,11 @@ jobs:
 
       # Install the dependencies.
       - run: |
-            cd ../module4_cicd/CI-FullstackApp/backend && npm ci
+            cd  module4_cicd/CI-FullstackApp/backend && npm ci
 
       # Run the tests.
       - run: |
-            cd ../module4_cicd/CI-FullstackApp/backend && npm test
+            cd module4_cicd/CI-FullstackApp/backend && npm test
 
       # Run the linter.
       - run: |
