@@ -49,7 +49,7 @@ jobs:
 
       # Run the linter.
       - run: |
-            cd backend && npm run lint
+            cd module4_cicd/CI-FullstackApp/backend && npm run lint
 
       # Send a console message at completion.
       - run: |
